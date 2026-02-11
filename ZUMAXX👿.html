@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zuma Terminal</title>
+
+<style>
+body {
+    margin: 0;
+    background: #000;
+    font-family: monospace;
+    color: #00ff66;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.terminal {
+    width: 95%;
+    max-width: 420px;
+    background: rgba(0,0,0,0.95);
+    border: 1px solid #00ff66;
+    box-shadow: 0 0 25px #00ff66;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.video-box video {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px #00ff66;
+}
+
+.logo {
+    width: 90px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px #00ff66);
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: black;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    border-radius: 6px;
+}
+
+button:active {
+    background: #00ff66;
+    color: black;
+}
+
+.output {
+    margin-top: 15px;
+    font-size: 13px;
+    min-height: 100px;
+    white-space: pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="terminal">
+
+    <!-- VIDEO -->
+    <div class="video-box">
+        <video autoplay muted loop playsinline>
+            <source src="ZUMA.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- FOTO -->
+    <img src="RAX.jpg" class="logo">
+
+    <h3>ZUMA BUG🐸</h3>
+
+    <input 
+        type="text"
+        id="nomor"
+        placeholder="Numbers Only (Max 30)"
+        inputmode="numeric"
+        maxlength="30"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,30)"
+    >
+
+    <!-- PILIHAN MODE -->
+    <select id="mode">
+        <option>CRASH 👿</option>
+        <option>FORCE CLOSE ⚠️</option>
+        <option>SURAT 👹</option>
+    </select>
+
+    <button onclick="runSim()">EXECUTE</button>
+    <button onclick="resetSim()">RESET</button>
+
+    <div class="output" id="output">
+> Bug Ready😈...
+    </div>
+
+</div>
+
+<script>
+function typeEffect(text, element, speed = 20) {
+    element.innerHTML = "";
+    let i = 0;
+    function typing() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+function runSim() {
+    const nomor = document.getElementById("nomor").value || "Unknown";
+    const mode = document.getElementById("mode").value;
+    const output = document.getElementById("output");
+
+    let text = 
+"> Target: " + nomor + "\n" +
+"> Jenis Bug: " + mode + "\n" +
+"> BERSIAP LAH...\n" +
+"> 1...\n" +
+"> 2...\n" +
+"> 3...\n" +
+"> Bug Terkirim😈";
+
+    typeEffect(text, output);
+}
+
+function resetSim() {
+    document.getElementById("nomor").value = "";
+    document.getElementById("mode").selectedIndex = 0;
+    document.getElementById("output").innerHTML = "> System reset...";
+}
+</script>
+
+</body>
+</html>
